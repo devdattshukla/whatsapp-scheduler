@@ -22,7 +22,7 @@ data = {
         "body": "🎉 GitHub Actions test message successful!"
     }
 }
-
 response = requests.post(url, headers=headers, json=data)
-print(response.status_code)
-print(response.text)
+
+print("STATUS:", response.status_code)
+print("RESPONSE:", response.text)
