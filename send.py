@@ -12,7 +12,7 @@ with open("contacts.json", "r") as f:
     contacts = json.load(f)
 
 for contact in contacts:
-    if true:
+    if contact["birthday"] == today:
 
         url = f"https://graph.facebook.com/v20.0/{PHONE_NUMBER_ID}/messages"
 
