@@ -32,5 +32,5 @@ for contact in contacts:
 
         response = requests.post(url, headers=headers, json=data)
 
-        print("STATUS:", response.status_code)
-        print("RESPONSE:", response.text)
+print("STATUS CODE:", response.status_code)
+print("RESPONSE TEXT:", response.text)
