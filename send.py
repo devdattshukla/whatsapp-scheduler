@@ -32,5 +32,5 @@ for contact in contacts:
 
         response = requests.post(url, headers=headers, json=data)
 
-print("STATUS CODE:", response.status_code)
-print("RESPONSE TEXT:", response.text)
+rint(response.status_code)
+print(response.text)
