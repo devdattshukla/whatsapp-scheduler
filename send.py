@@ -1,28 +1,36 @@
 import os
+import json
 import requests
+from datetime import datetime
 
 TOKEN = os.environ["TOKEN"]
 PHONE_NUMBER_ID = os.environ["PHONE_NUMBER_ID"]
 
-# 👉 YOUR WhatsApp number (test recipient)
-TO_NUMBER = "919925210608"   # replace this
+today = datetime.now().strftime("%m-%d")
 
-url = f"https://graph.facebook.com/v20.0/{PHONE_NUMBER_ID}/messages"
+with open("contacts.json", "r") as f:
+    contacts = json.load(f)
 
-headers = {
-    "Authorization": f"Bearer {TOKEN}",
-    "Content-Type": "application/json"
-}
+for contact in contacts:
+    if contact["birthday"] == today:
 
-data = {
-    "messaging_product": "whatsapp",
-    "to": TO_NUMBER,
-    "type": "text",
-    "text": {
-        "body": "🎉 GitHub Actions test message successful!"
-    }
-}
-response = requests.post(url, headers=headers, json=data)
+        url = f"https://graph.facebook.com/v20.0/{PHONE_NUMBER_ID}/messages"
 
-print("STATUS:", response.status_code)
-print("RESPONSE:", response.text)
+        headers = {
+            "Authorization": f"Bearer {TOKEN}",
+            "Content-Type": "application/json"
+        }
+
+        data = {
+            "messaging_product": "whatsapp",
+            "to": contact["phone"],
+            "type": "text",
+            "text": {
+                "body": f"🎂 Happy Birthday {contact['name']}! Wishing you a wonderful day and a happy year ahead."
+            }
+        }
+
+        response = requests.post(url, headers=headers, json=data)
+
+        print("STATUS:", response.status_code)
+        print("RESPONSE:", response.text)
